@@ -1,0 +1,78 @@
+
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>NJIT Math Capstone </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/cssmenu/styles.css">
+    </head>
+    <body>
+        <!-- Add your site or application content here -->
+        <div id='cssmenu'></div>
+
+        <!-- the content section is the only section you should edit unless you
+            know what you are doing. -->
+
+        <div id='content'>
+            <!-- pages are broken up into "posts". most pages will contain only
+            a single post, however some pages may contain multiple posts. For
+            example, the image analysis page should contain a "post" for each
+            component analysed. -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Results</h2>
+                    <p class="section-contributors">
+                        Supervisor: Lou Kondic
+                    </p>
+                    <p class="section-contributors">
+                        Team: Noah Roselli, Joseph Torsiello, Divyjot Singh, Ricky Palaguachi
+                    </p>
+                </header>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h3 class="section-title">Sequential DLA</h3>
+                    <div class="section-content">
+                        In this section, we analyze the results of running our DLA algorithm sequentially.
+                        Meaning that we release one random walker at a time, sequentially. 
+                        There is only ever one free particle walking, so this is the more time-consuming approach. 
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h3 class="section-title">Parallel DLA</h3>
+                    <div class="section-content">
+                        <p>
+                            In this section, we analyze the results of running our DLA algorithm in parallel using vectorization in MATLAB.
+                        </p>
+                        <p>
+                            We cleverly take advantage of MATLAB's vectorization features and represent our random walker's positions
+                            in column vectors. Instead of adjusting a single random walker's \((x, y)\) position at a time, we have 
+                            two vectors of size \(N_{particles}\) holding \((x, y)\) data of ALL random walkers simultaneously.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- No more content after here -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- this script loads content into the cssmenu -->
+        <script src="js/cssmenu.js"></script>
+</html>
