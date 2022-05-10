@@ -185,9 +185,11 @@ The simplest way of doing this was by simply adding a probability of drying on t
 
 
 # Vectorization / Optimization
-
+<!-- TODO: Next section 1 -->
 
 # Results
+<!-- TODO: Next section 2 -->
+
 
 # Discussion
 
