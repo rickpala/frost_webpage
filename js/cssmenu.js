@@ -19,7 +19,13 @@ document.getElementById("cssmenu").innerHTML =
 "<ul>" + 
     "<li class='menu-title'><span><img src='https://www.njit.edu/corporate/uicomponents/images/logo.png' alt='New Jersey Institute of Technology' id='njitlogo' height='65' width='180'></span></li>" +
     "<li><a href='index.html'><span>Home</span></a></li>" +
-    "<li><a href='simulations.html'><span>Simulations</span></a></li>" +
-    "<li><a href='results.html'><span>Interpreting Results</span></a></li>" +
+    "<li><a href='abstract.html'><span>Abstract</span></a></li>" +
+    "<li><a href='introduction.html'><span>Introduction</span></a></li>" +
+    "<li><a href='Physics.html'><span>Physics</span></a></li>" +
+    "<li><a href='Algorithm.html'><span>Algorithm</span></a></li>" +
+    "<li><a href='Vectorization.html'><span>Vectorization</span></a></li>" +
+    "<li><a href='fractalAlgorithms.html'><span>fractalAlgorithm</span></a></li>" +
+    "<li><a href='results.html'><span>Results</span></a></li>" +
+    "<li><a href='conclusion.html'><span>Conclusion</span></a></li>" +
     "<li><a href='https://github.com/idivjyot/DLAFrostSimulation'><span>View Source</span></a></li>" +
 "</ul>";
