@@ -32,82 +32,103 @@
             component analysed. -->
             <section class="section">
                 <header class="section-header">
-                    <h3 class="section-title"></h2>
+                    <h3 class="section-title">Results and Discussion</h2>
                 </header>
                 <div class="section-content">
-
+                    We run simulations for the original algorithm (which we will
+                    call the simple algorithm) and the vectorized algorithm and
+                    compare the two in this section. This is done first visually
+                    and then by doing fractal analysis to calculate the fractal
+                    dimension of the output from the two algorithms. In all of
+                    the following graphics, {\fontfamily{qcr}\selectfont nx = ny
+                    = 200}, {\fontfamily{qcr}\selectfont drying} and
+                    {\fontfamily{qcr}\selectfont freezing} and noted in the
+                    captions of the figures, \(N = 5000\) particles and
+                    released, and \(n = 3000\) is lifespan of the random
+                    walkers. 
                 </div>
             </section>
             <section class="section">
                 <header class="section-header">
-                    <h3 class="section-title"></h2>
+                    <h3 class="section-title">Comparing Algorithm Outputs</h2>
                 </header>
                 <div class="section-content">
-
+                    In Figures \ref{fig:dla_noah_compare} to \ref{fig:vec_5},
+                    different results are shown for both of the algorithms. In
+                    each of the captions, the specific values for
+                    {\fontfamily{qcr}\selectfont freezing} and
+                    {\fontfamily{qcr}\selectfont drying} are provided. There is
+                    a sense of randomness in both of the algorithms, as the
+                    random walkers are spawned from random locations and move in
+                    random directions, however, more or less, it visually
+                    appears that the results are similar. In Section
+                    \ref{section:fracanalysis}, we go into more detail on the
+                    fractal dimension for each of the algorithms using the two
+                    previously defined fractal dimension algorithms (Section
+                    \ref{section:fractalAnal}).
                 </div>
             </section>
             <section class="section">
                 <header class="section-header">
-                    <h3 class="section-title"></h2>
+                    <h3 class="section-title">Fractal Analysis</h2>
                 </header>
                 <div class="section-content">
+                    For simplicity, we have split up the two fractal dimension algorithms to better comprehend the results. 
 
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
-                </div>
-            </section>
-            <section class="section">
-                <header class="section-header">
-                    <h3 class="section-title"></h2>
-                </header>
-                <div class="section-content">
-
+                    \begin{center}
+                        \begin{tabular}{||c c | c c||} 
+                            \hline
+                            Freezing & Drying & Box (Simple) & Box (Vector) \\ [0.5ex] 
+                            \hline\hline
+                            1 & 0 & 1.3708 & 1.3769 \\ 
+                            \hline
+                            0.5 & 0.5 & 1.6141 & 1.5825   \\
+                            \hline
+                            0.5 & 0.375 & 1.5545 & 1.5689  \\
+                            \hline
+                            0.5 & 0.25 & 1.5398 & 1.5429  \\
+                            \hline
+                            0.25 & 0.125 & 1.5819 & 1.6021 \\
+                            \hline
+                            0.05 & 0.001 & 1.6633 & 1.6397 \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                    
+                    \begin{center}
+                        \begin{tabular}{||c c | c c||} 
+                            \hline
+                            Freezing & Drying & Corr. (Simple) & Corr. (Vector) \\ [0.5ex] 
+                            \hline\hline
+                            1 & 0 & 1.5636 & 1.6118 \\ 
+                            \hline
+                            0.5 & 0.5 & 1.6030 & 1.6253   \\
+                            \hline
+                            0.5 & 0.375 & 1.5914 & 1.6112  \\
+                            \hline
+                            0.5 & 0.25 & 1.6564 & 1.6730  \\
+                            \hline
+                            0.25 & 0.125 & 1.5557 & 1.6415 \\
+                            \hline
+                            0.05 & 0.001 & 1.7571 & 1.7499 \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                    
+                    Although the results are not consistent between the two
+                    methods that were used to calculate the fractal dimension,
+                    they provide consistent results between two of the same runs
+                    of the patterns that were developed in the simple and the
+                    vectorized algorithms. The discrepancies between fractal
+                    algorithms is not of too much concern since we were
+                    attempting to show that the results between frosting
+                    algorithms were consistent. This appears to be relatively
+                    true. However, the slight changes between the numbers can be
+                    due to a handful of reasons: for example, in some of the
+                    simple algorithm runs, not all 5000 particles stuck,
+                    therefore we were dealing with shapes of different relative
+                    sizes. Furthermore, there is randomness inherent to both of
+                    the algorithms and they will never be the exact same. 
                 </div>
             </section>
         </div>
