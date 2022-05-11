@@ -18,8 +18,6 @@
 document.getElementById("cssmenu").innerHTML = 
 "<ul>" + 
     "<li class='menu-title'><span><img src='https://www.njit.edu/corporate/uicomponents/images/logo.png' alt='New Jersey Institute of Technology' id='njitlogo' height='65' width='180'></span></li>" +
-    "<li><a href='index.html'><span>Home</span></a></li>" +
-    "<li><a href='abstract.html'><span>Abstract</span></a></li>" +
     "<li><a href='introduction.html'><span>Introduction</span></a></li>" +
     "<li><a href='physics.html'><span>Physics</span></a></li>" +
     "<li><a href='algorithm.html'><span>Algorithm</span></a></li>" +
