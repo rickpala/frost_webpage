@@ -48,8 +48,8 @@
                     subprocesses, vectorization was ultimately chosen to make
                     the algorithm more efficient. This is because
                     parallelization is best implemented when attempting to run
-                    several `independent' subprocesses so that no overlaps or
-                    `data races' occur, where two or more threads/CPUs are
+                    several 'independent' subprocesses so that no overlaps or
+                    'data races' occur, where two or more threads/CPUs are
                     running in the same process. In order to parallelize the
                     frosting model, multiple processes would have to be tracked
                     to ensure no overlapping, including the state of the frost
@@ -61,15 +61,15 @@
 
                     <div class="image-container">
                         <figure>
-                            <img width="75%" src="sections/Images/Vectorization/compareAlgorithms.jpg" class="image">
+                            <img width="800" height="800" src="sections/Images/Vectorization/compareAlgorithms.jpg" class="image">
                             <figcaption>
                                 Here is a plot of the time (minutes) each
                                 algorithm (Single RW and Vectorized) takes to
                                 complete for 6 different pairs of freezing
-                                probabilities $p_{\text{ice}}$ and drying
-                                probabilities $p_{\text{dry}}$.
+                                probabilities \(p_{\text{ice}}\) and drying
+                                probabilities \(p_{\text{dry}}\).
 
-                                \label{fig:comparingEfficiency}
+                                <!-- \label{fig:comparingEfficiency} -->
                             </figcaption>
                         </figure>
                     </div>
@@ -99,7 +99,7 @@
                 <div class="section-content">
                     <div class="image-container">
                         <figure>
-                            <img width="75%" src="sections/Images/Vectorization/walkers.png" class="image">
+                            <img width="800" height="800" src="sections/Images/Vectorization/walkers.png" class="image">
                             <figcaption>
                                 This image illustrates the movement of the
                                 vectorized walkers (magenta), the ice particles
@@ -125,7 +125,7 @@
                     one of four coordinate directions (up/down/left/right) after
                     each iteration.
 
-                    The vectorized walkers, walk, by updating the `walk'
+                    The vectorized walkers, walk, by updating the 'walk'
                     function to take in the array of walker positions as input,
                     creating arrays for the x and y coordinates of these
                     positions, and adding either -1, 0, or 1 to each coordinate
@@ -134,7 +134,8 @@
                     every iteration is done with the following lines of MATLAB
                     code in the walk function. 
                     
-                    \begin{lstlisting} 
+                    <pre>
+
                         rx = randi([-1 0],1,particles) + randi([0 1],1,particles);
                         
                         ry = zeros(1,particles);
@@ -144,25 +145,25 @@
                         
                         xNew = x + rx;
                         yNew = y + ry;
-                    \end{lstlisting}
+                    </pre>
 
-                    This code creates a vector {\fontfamily{qcr}\selectfont rx}
+                    This code creates a vector <code>rx</code>
                     with elements that have a 1/4 chance to be -1, 1/4 chance to
                     be +1, and a 1/2 chance to be 0. This also creates a vector
-                    {\fontfamily{qcr}\selectfont ry} with elements that are 0 in
-                    the {\fontfamily{qcr}\selectfont rx} vector having a 1/2
+                    <code>ry</code> with elements that are 0 in
+                    the <code>rx</code> vector having a 1/2
                     chance of becoming either 1 or -1, and the rest of the
-                    elements in {\fontfamily{qcr}\selectfont ry} remaining zero
-                    since they are -1 or 1 in {\fontfamily{qcr}\selectfont rx}
+                    elements in <code>ry</code> remaining zero
+                    since they are -1 or 1 in <code>rx</code>
                     (i.e. the walker moved in an x-direction already). By then
-                    adding {\fontfamily{qcr}\selectfont rx} to the x coordinates
-                    and {\fontfamily{qcr}\selectfont ry} to the y coordinates,
+                    adding <code>rx</code> to the x coordinates
+                    and <code>ry</code> to the y coordinates,
                     all the walkers walk to their next position. Most
                     importantly, for each walker, the probability of moving left
                     (right) is 1/4 since each element in
-                    {\fontfamily{qcr}\selectfont rx} has a 1/4 chance of being
+                    <code>rx</code> has a 1/4 chance of being
                     -1 (+1), and the probability of moving down (up) is 1/4
-                    since each element in {\fontfamily{qcr}\selectfont ry} has a
+                    since each element in <code>ry</code> has a
                     (1/2 times 1/2) chance of being -1 (+1). Overall, each
                     walker moves with uniform probability in one of the four
                     coordinate directions.
@@ -189,16 +190,16 @@
                     particle, the sticking probability is updated to include the
                     union probability of each walker sticking (i.e. if one
                     sticks they all stick). This is simply the probability that
-                    at least one of $N$ walkers (that were adjacent) stick. 
+                    at least one of \(N\) walkers (that were adjacent) stick. 
 
-                    The probability that none of $N$ walkers stick is modeled by
-                    a binomial distribution with zero `successes' ($k = 0$) and
-                    success probability $\mathbb{P}_f \equiv \text{Freezing
-                    Probability}$, i.e. $\mathbb{P}_0 = {N \choose 0}
+                    The probability that none of \(N\) walkers stick is modeled by
+                    a binomial distribution with zero 'successes' (\(k = 0\)) and
+                    success probability \(\mathbb{P}_f \equiv \text{Freezing
+                    Probability}\), i.e. \(\mathbb{P}_0 = {N \choose 0}
                     {\mathbb{P}_f}^0 (1 - \mathbb{P}_f)^{N-0} = (1 -
-                    \mathbb{P}_f)^N$. Therefore, the probability that at least
-                    one walker sticks is simply $1 - \mathbb{P}_0$, which gives
-                    the new sticking probability $\mathbb{P}$ of taking all $N$
+                    \mathbb{P}_f)^N\). Therefore, the probability that at least
+                    one walker sticks is simply \(1 - \mathbb{P}_0\), which gives
+                    the new sticking probability \(\mathbb{P}\) of taking all \(N\)
                     walkers together as one:
 
                     \begin{equation}\label{eq:stickProb}
@@ -208,7 +209,7 @@
                     If this probability is satisfied, all the walkers stick. If
                     the probability is not satisfied, all the walkers also have
                     a probability to dry using the same probability model (with
-                    $\mathbb{P}_f$ replaced by the fixed drying probability).
+                    \(\mathbb{P}_f\) replaced by the fixed drying probability).
                     Otherwise, all walkers simply continue to walk together.
                     
                     The process of having walkers adjacent to the same ice
@@ -243,16 +244,16 @@
                     1 (and moving down or left by -1 respectively), a random
                     walk on a 2D lattice can be modeled (proportionally) by the
                     already well-established 1D random walk (which either moves
-                    left or right with equal probability $\frac{1}{2}$). Let's
-                    denote the position of this 1D walker after an $n$ number of
-                    iterations as $x_n$. Also, let $s_i = 1$ if the step at
-                    iteration $i$ was to the right, and let $s_i = -1$ if the
-                    step at iteration $i$ was to the left.
+                    left or right with equal probability \(\frac{1}{2}\)). Let's
+                    denote the position of this 1D walker after an \(n\) number of
+                    iterations as \(x_n\). Also, let \(s_i = 1\) if the step at
+                    iteration \(i\) was to the right, and let \(s_i = -1\) if the
+                    step at iteration \(i\) was to the left.
 
-                    The average distance this 1D walker travels $\langle x_n
-                    \rangle$ is shown here,
+                    The average distance this 1D walker travels \(\langle x_n
+                    \rangle\) is shown here,
 
-                    \begin{equation}\label{eq:stickProb}
+                    \begin{equation}
                          \langle x_n \rangle = \langle \sum_{i=1}^{n} s_i \rangle = \sum_{i=1}^{n} \langle s_i \rangle = \sum_{i=1}^{n} \frac{1}{2}(-1) + \frac{1}{2}(1) = 0
                     \end{equation}
 
@@ -262,33 +263,33 @@
                     The average squared distance of the 1D walker, on the other
                     hand, is not zero and is shown here.
 
-                    \begin{multline}\label{eq:stickProb}
-                         \langle {x_n}^2 \rangle = \langle \sum_{i=1}^{n} \sum_{j=1}^{n} s_i s_j \rangle = \sum_{i=1}^{n} \langle {s_i}^2 \rangle + \sum_{i=1}^{n} \sum_{j>i}^{n} \langle s_i s_j \rangle\\
+                    \begin{multline}
+                         \langle {x_n}^2 \rangle = \langle \sum_{i=1}^{n} \sum_{j=1}^{n} s_i s_j \rangle = \sum_{i=1}^{n} \langle {s_i}^2 \rangle + \sum_{i=1}^{n} \sum_{j>i}^{n} \langle s_i s_j \rangle \\
                          = \sum_{i=1}^{n} \left(\frac{1}{2}(-1)^2 + \frac{1}{2}(1)^2 \right) +\\ \sum_{i=1}^{n} \sum_{j>i}^{n} \left( \frac{1}{4}(1)(1) + \frac{1}{4}(-1)(1) + \frac{1}{4}(1)(-1) + \frac{1}{4}(-1)(-1) \right) \\
                          = n + 0 = n
                     \end{multline}
 
                     Therefore, the root mean square (rms) of the distance for
                     the 1D walker (as well as proportionally to the vectorized
-                    walkers on the 2D lattice) is $d = \sqrt{\langle x_N
-                    \rangle} = \sqrt{N}$.
+                    walkers on the 2D lattice) is \(d = \sqrt{\langle x_N
+                    \rangle} = \sqrt{N}\).
                     
                     To ensure that the code which creates and runs the
                     vectorized walkers still exhibit a diffusive nature, the
-                    average distance a walker travels $d$ was compared with the
-                    square root of the number of iterations $\sqrt{N}$, as the
+                    average distance a walker travels \(d\) was compared with the
+                    square root of the number of iterations \(\sqrt{N}\), as the
                     number of iterations increases. These two variables should
-                    tend to one another as $N$ approaches infinity, as developed
+                    tend to one another as \(N\) approaches infinity, as developed
                     previously.
                     
                     <div class="image-container">
                         <figure>
-                            <img width="75%" src="sections/Images/Vectorization/rad30.jpg" class="image">
+                            <img width="800" height="800" src="sections/Images/Vectorization/rad30.jpg" class="image">
                             <figcaption>
                                 For walkers starting on a circle of radius 30,
                                 the relative difference between the average
-                                distance a walker travels $d$ and the square
-                                root of the number of iterations $\sqrt{N}$, is
+                                distance a walker travels \(d\) and the square
+                                root of the number of iterations \(\sqrt{N}\), is
                                 plotted versus the number of iterations that
                                 have occurred. 5,000 walkers are used, and the
                                 domain is 401 by 401.
@@ -299,12 +300,12 @@
                     
                     <div class="image-container">
                         <figure>
-                            <img width="75%" src="sections/Images/Vectorization/rad170.jpg" class="image">
+                            <img width="800" height="800" src="sections/Images/Vectorization/rad170.jpg" class="image">
                             <figcaption>
                                 For walkers starting on a circle of radius 170,
                                 the relative difference between the average
-                                distance a walker travels $d$ and the square
-                                root of the number of iterations $\sqrt{N}$, is
+                                distance a walker travels \(d\) and the square
+                                root of the number of iterations \(\sqrt{N}\), is
                                 plotted versus the number of iterations that
                                 have occurred. 5,000 walkers are used, and the
                                 domain is 401 by 401.
@@ -316,17 +317,17 @@
                     
                     Figure \ref{fig:diffusionWalkers30} and Figure
                     \ref{fig:diffusionWalkers170} show the relative difference
-                    between $d$ and $\sqrt{N}$ ($\text{Relative Difference} =
-                    \frac{|d - \sqrt{N}|}{\sqrt{N}}$) for 5,000 vectorized
+                    between \(d\) and \(\sqrt{N}\) (\(\text{Relative Difference} =
+                    \frac{|d - \sqrt{N}|}{\sqrt{N}}\)) for 5,000 vectorized
                     walkers which start on a circle of radius 30 and 170,
                     respectively. The standard domain of 401 by 401 is chosen
                     (200 from the origin on all sides), and there is no seed for
                     either radius because only the nature of the walkers is
                     being tested. As the plots show, while the relative
-                    difference between $d$ and $\sqrt{N}$ does appear to be
+                    difference between \(d\) and \(\sqrt{N}\) does appear to be
                     increasing, it is relatively small with the average distance
-                    never going beyond double $\sqrt{N}$ (i.e. the relative
-                    difference remains below $1$). More importantly, the max
+                    never going beyond double \(\sqrt{N}\) (i.e. the relative
+                    difference remains below \(1\)). More importantly, the max
                     number of iterations for the walkers is usually fixed at
                     10,000, and as Fig.~(\ref{fig:diffusionWalkers30}) shows,
                     the relative difference remains quite small (below 0.25) for
@@ -344,15 +345,15 @@
                 <div class="section-content">
                     <div class="image-container">
                         <figure>
-                            <img width="75%" src="sections/Images/Vectorization/tooManyWalkers.jpg" class="image">
+                            <img width="800" height="800" src="sections/Images/Vectorization/tooManyWalkers.jpg" class="image">
                             <figcaption>
                                 The vectorized algorithm with
-                                {\fontfamily{qcr}\selectfont freezing} = 0.75,
-                                {\fontfamily{qcr}\selectfont drying} = 0.25,
-                                {\fontfamily{qcr}\selectfont nx = ny} = 200, $N$
-                                = 5000 particles, {\fontfamily{qcr}\selectfont
-                                max iterations per batch} = 10000, and
-                                {\fontfamily{qcr}\selectfont walkers per batch}
+                                <code>freezing</code> = 0.75,
+                                <code>drying</code> = 0.25,
+                                <code> nx = ny</code> = 200, \(N\)
+                                = 5000 particles, 
+                                <code>max iterations per batch</code> = 10000, and
+                                <code>walkers per batch</code>
                                 = 5000.
                                 
                                 \label{fig:tooManyWalkers}
@@ -368,31 +369,31 @@
                     infinity, if a lot of walkers are spawned with a relatively
                     small region, they are biased to all stick to the seed at
                     once. This bias can be fixed by releasing a smaller number
-                    of walkers in groups or `batches', while still starting with
+                    of walkers in groups or 'batches', while still starting with
                     an initially small radius of 30 that grows relative to the
                     size of the crystal, and such that the walker spawning
                     circle remains a distance of 30 from the crystal.
                     
                     <div class="image-container">
                         <figure>
-                            <img width="75%" src="sections/Images/Vectorization/enoughWalkers.jpg" class="image">
+                            <img width="800" height="800" src="sections/Images/Vectorization/enoughWalkers.jpg" class="image">
                             <figcaption>
                                 The vectorized algorithm with
-                                {\fontfamily{qcr}\selectfont freezing} = 0.75,
-                                {\fontfamily{qcr}\selectfont drying} = 0.25,
-                                {\fontfamily{qcr}\selectfont nx = ny} = 200, $N$
-                                = 5000 particles, {\fontfamily{qcr}\selectfont
-                                max iterations per batch} = 10000, and
-                                {\fontfamily{qcr}\selectfont walkers per batch}
+                                <code>freezing</code> = 0.75,
+                                <code>drying</code> = 0.25,
+                                <code>nx = ny</code> = 200, \(N\)
+                                = 5000 particles, <code>
+                                max iterations per batch</code> = 10000, and
+                                <code>walkers per batch</code>
                                 = 500.
 
                                 The vectorized algorithm with
-                                {\fontfamily{qcr}\selectfont freezing} = 0.75,
-                                {\fontfamily{qcr}\selectfont drying} = 0.25,
-                                {\fontfamily{qcr}\selectfont nx = ny} = 200, $N$
-                                = 5000 particles, {\fontfamily{qcr}\selectfont
-                                max iterations per batch} = 10000, and
-                                {\fontfamily{qcr}\selectfont walkers per batch}
+                                <code>freezing</code> = 0.75,
+                                <code>drying</code> = 0.25,
+                                <code>nx = ny</code> = 200, \(N\)
+                                = 5000 particles, <code>
+                                max iterations per batch</code> = 10000, and
+                                <code>walkers per batch</code>
                                 = 500.
                             </figcaption>
                         </figure>

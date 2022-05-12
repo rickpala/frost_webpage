@@ -1,0 +1,125 @@
+
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>NJIT Math Capstone </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/cssmenu/styles.css">
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div id='cssmenu'></div>
+
+        <!-- the content section is the only section you should edit unless you
+            know what you are doing. -->
+
+        <div id='content'>
+            <!-- pages are broken up into "posts". most pages will contain only
+            a single post, however some pages may contain multiple posts. For
+            example, the image analysis page should contain a "post" for each
+            component analysed. -->
+            <section class="section">
+                <header class="section-header">
+                    <h2 class="section-title">Fractal Analysis Algorithms</h2>
+                </header>
+                <div class="section-content">
+                    Two different algorithms are used to analyze and extract the
+                    fractal dimension \(d\) from the different frost crystals
+                    created: 1. The Box-Counting Fractal Dimension Algorithm and
+                    2. The Correlation Fractal Dimension Algorithm
+                    \cite{corrFrac}. Even though each of these two algorithms
+                    may appear similar, the fact that they are two different
+                    algorithms at the core, leads to potentially different
+                    results. Different fractal dimension algorithms are
+                    well-known to give different but relatively close results,
+                    which still makes them useful metrics for comparing many
+                    different fractal patterns, including frost growth.
+                </div>
+            </section>
+        <section class="section">
+            <header class="section-header">
+                <h2 class="section-title">The Box-Counting Fractal Dimension Algorithm</h2>
+            </header>
+            <div class="section-content">
+                <p>
+                    The Box-Counting Fractal Dimension Algorithm is a very
+                    well-known algorithm for computing fractal dimensions (also
+                    known as the Minkowski-Bouligand dimension). Here, the procedure
+                    of the algorithm is simply laid out:
+                </p>
+
+                
+                <ol width="50%">
+                    <li>
+                        Load data file: A matrix the size of the specified
+                        domain, whereby each element is either a 0 if it
+                        represents water, a 1 if it represents an ice
+                        particle/region, and a 2 if it represents dry
+                        particle/region. Note: Any element which contains a 2 is
+                        removed, because only the fractal dimension of the frost
+                        crystal is analyzed.
+                    </li>
+                    <li>
+                        Define several data resolutions \(s\)
+
+                        <ul><li> The data resolution, \(s\), is a number between
+                        \(0\) and \(1\), which is proportional to the number of
+                        boxes (or pixels) that are used to 'visualize' all of
+                        the data (\(s = 1\) is defined as the 'max resolution',
+                        where a box simply covers an element in the matrix from
+                        the data file). It is also inversely proportional to the
+                        side length of each box (\(1/s\)), with the unit box
+                        length taken to equal \(1\) to coincide with the max
+                        resolution \(s = 1\).</li></ul>
+                    </li>
+                    <li>
+                        Count the number of boxes \(N(s)\)
+                        programmatically for each data resolution \(s\)
+                        
+                        <ul><li> Starting with \(s = 1\), the number of boxes
+                        \(N(1)\) is simply the number of ice particles in the data
+                        file (i.e. summing all nonzero elements). For all other
+                        \(s\), a new data matrix is created which is scaled by \(s\)
+                        (the resolution). This new data matrix is created by
+                        breaking up the main data file matrix into several \(1/s\)
+                        by \(1/s\) matrices (which is done by using the 'conv2'
+                        function on MATLAB, and removing any extra indices
+                        created from the function). Any of these matrices which
+                        simply contain one or more ice particles (element = 1),
+                        is considered a box and counted. For each \(s\), \(N(s)\) is
+                        recorded. Note: Any boundaries that stick out are simply
+                        omitted.</li></ul>
+                    </li>
+                    <li>
+                        Plot \(\ln{N}\) vs. \(\ln{s}\) and fit to a linear function:
+                        The slope of this linear function gives the computed
+                        fractal dimension \(d\).
+                    </li>
+                </ol>
+            </div>
+        </section>
+        </div>
+
+        <!-- No more content after here -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- this script loads content into the cssmenu -->
+        <script src="js/cssmenu.js"></script>
+    </body>
+</html>

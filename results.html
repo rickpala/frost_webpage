@@ -40,9 +40,9 @@
                     compare the two in this section. This is done first visually
                     and then by doing fractal analysis to calculate the fractal
                     dimension of the output from the two algorithms. In all of
-                    the following graphics, {\fontfamily{qcr}\selectfont nx = ny
-                    = 200}, {\fontfamily{qcr}\selectfont drying} and
-                    {\fontfamily{qcr}\selectfont freezing} and noted in the
+                    the following graphics, <code>nx = ny
+                    = 200</code>, <code> drying</code> and
+                    <code> freezing</code> and noted in the
                     captions of the figures, \(N = 5000\) particles and
                     released, and \(n = 3000\) is lifespan of the random
                     walkers. 
@@ -56,8 +56,8 @@
                     In Figures \ref{fig:dla_noah_compare} to \ref{fig:vec_5},
                     different results are shown for both of the algorithms. In
                     each of the captions, the specific values for
-                    {\fontfamily{qcr}\selectfont freezing} and
-                    {\fontfamily{qcr}\selectfont drying} are provided. There is
+                    <code> freezing</code> and
+                    <code> drying</code> are provided. There is
                     a sense of randomness in both of the algorithms, as the
                     random walkers are spawned from random locations and move in
                     random directions, however, more or less, it visually
@@ -74,46 +74,93 @@
                 </header>
                 <div class="section-content">
                     For simplicity, we have split up the two fractal dimension algorithms to better comprehend the results. 
-
-                    \begin{center}
-                        \begin{tabular}{||c c | c c||} 
-                            \hline
-                            Freezing & Drying & Box (Simple) & Box (Vector) \\ [0.5ex] 
-                            \hline\hline
-                            1 & 0 & 1.3708 & 1.3769 \\ 
-                            \hline
-                            0.5 & 0.5 & 1.6141 & 1.5825   \\
-                            \hline
-                            0.5 & 0.375 & 1.5545 & 1.5689  \\
-                            \hline
-                            0.5 & 0.25 & 1.5398 & 1.5429  \\
-                            \hline
-                            0.25 & 0.125 & 1.5819 & 1.6021 \\
-                            \hline
-                            0.05 & 0.001 & 1.6633 & 1.6397 \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
+                    <table>
+                        <thead>
+                            <th>Freezing</th>
+                            <th>Drying</th>
+                            <th>Box (Simple)</th>
+                            <th>Box (Vector)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1.3708</td>
+                                <td>1.3769</td>
+                            </tr>
+                            <tr>
+                                <td>0.5</td>
+                                <td>0.5</td>
+                                <td>1.6141</td>
+                                <td>1.5825</td>
+                            </tr>
+                            <tr>
+                                <td>0.5</td>
+                                <td>0.375</td>
+                                <td>1.5545</td>
+                                <td>1.5689</td>
+                            </tr>
+                            <tr>
+                                <td>0.5</td>
+                                <td>0.25</td>
+                                <td>1.5819</td>
+                                <td>1.6021</td>
+                            </tr>
+                            <tr>
+                                <td>0.05</td>
+                                <td>0.001</td>
+                                <td>1.6633</td>
+                                <td>1.6397</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     
-                    \begin{center}
-                        \begin{tabular}{||c c | c c||} 
-                            \hline
-                            Freezing & Drying & Corr. (Simple) & Corr. (Vector) \\ [0.5ex] 
-                            \hline\hline
-                            1 & 0 & 1.5636 & 1.6118 \\ 
-                            \hline
-                            0.5 & 0.5 & 1.6030 & 1.6253   \\
-                            \hline
-                            0.5 & 0.375 & 1.5914 & 1.6112  \\
-                            \hline
-                            0.5 & 0.25 & 1.6564 & 1.6730  \\
-                            \hline
-                            0.25 & 0.125 & 1.5557 & 1.6415 \\
-                            \hline
-                            0.05 & 0.001 & 1.7571 & 1.7499 \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
+                    <table>
+                        <thead>
+                            <th>Freezing</th>
+                            <th>Drying</th>
+                            <th>Corr. (Simple)</th>
+                            <th>Corr. (Vector)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1.5636</td>
+                                <td>1.6118</td>
+                            </tr> 
+                            <tr>
+                                <td>0.5</td>
+                                <td>0.5</td>
+                                <td>1.6030</td>
+                                <td>1.6253</td>
+                            </tr>  
+                            <tr>
+                                <td>0.5</td>
+                                <td>0.375</td>
+                                <td>1.5914</td>
+                                <td>1.6112</td>
+                            </tr> 
+                            <tr>
+                                <td>0.5</td>
+                                <td>0.25</td>
+                                <td>1.6564</td>
+                                <td>1.6730</td>
+                            </tr> 
+                            <tr>
+                                <td>0.25</td>
+                                <td>0.125</td>
+                                <td>1.5557</td>
+                                <td>1.6415</td>
+                            </tr>
+                            <tr>
+                                <td>0.05</td>
+                                <td>0.001</td>
+                                <td>1.7571</td>
+                                <td>1.7499</td>
+                            </tr> 
+                        </tbody>
+                    </table>
                     
                     Although the results are not consistent between the two
                     methods that were used to calculate the fractal dimension,
